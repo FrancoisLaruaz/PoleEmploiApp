@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to PoleEmploiApp</h1>
+     <h2 class="display-5">ZE easiest WebApplication ever!</h2>
+     <br/>
+      <br/>
+      <div style="height:50px;">
+          <span id="spanInfo"></span>
+      </div>
+    <div>
+         <button  id="refreshJobOffersBtn">Refresh job offers</button> 
+         <a style="margin-left:10px;" target="_blank" href=/Home/DowloadExcelReport>Get job offers Excel file</a>
+    </div>
+</div>
+
+
+@Html.AntiForgeryToken()
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="~/js/Home.js"></script>

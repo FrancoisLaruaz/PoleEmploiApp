@@ -1,0 +1,15 @@
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\bin\Debug\net6.0\PoleEmploiApp.Services.deps.json
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\bin\Debug\net6.0\PoleEmploiApp.Services.dll
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\bin\Debug\net6.0\PoleEmploiApp.Services.pdb
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\bin\Debug\net6.0\PoleEmploiApp.DataEntities.dll
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\bin\Debug\net6.0\PoleEmploiApp.DataEntities.pdb
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.csproj.AssemblyReference.cache
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.AssemblyInfoInputs.cache
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.AssemblyInfo.cs
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.csproj.CoreCompileInputs.cache
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.csproj.CopyComplete
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.dll
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\refint\PoleEmploiApp.Services.dll
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\PoleEmploiApp.Services.pdb
+C:\Dev\PoleEmploiApp\PoleEmploiApp.Services\obj\Debug\net6.0\ref\PoleEmploiApp.Services.dll

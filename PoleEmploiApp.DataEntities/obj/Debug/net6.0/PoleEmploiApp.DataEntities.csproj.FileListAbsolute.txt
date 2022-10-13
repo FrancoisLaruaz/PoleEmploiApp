@@ -1,0 +1,12 @@
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\bin\Debug\net6.0\PoleEmploiApp.DataEntities.deps.json
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\bin\Debug\net6.0\PoleEmploiApp.DataEntities.dll
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\bin\Debug\net6.0\PoleEmploiApp.DataEntities.pdb
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\PoleEmploiApp.DataEntities.csproj.AssemblyReference.cache
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\PoleEmploiApp.DataEntities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\PoleEmploiApp.DataEntities.AssemblyInfoInputs.cache
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\PoleEmploiApp.DataEntities.AssemblyInfo.cs
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\PoleEmploiApp.DataEntities.csproj.CoreCompileInputs.cache
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\PoleEmploiApp.DataEntities.dll
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\refint\PoleEmploiApp.DataEntities.dll
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\PoleEmploiApp.DataEntities.pdb
+C:\Dev\PoleEmploiApp\PoleEmploiApp.DataEntities\obj\Debug\net6.0\ref\PoleEmploiApp.DataEntities.dll
