@@ -67,6 +67,7 @@ namespace PoleEmploiApp.Services
                 }
                 catch(Exception e)
                 {
+                    result.Success = false;
                     result.Error = result.Error + " | error for Id = " + jobOfferFromAPI.id + " : " + e.ToString();
                 }
             }
