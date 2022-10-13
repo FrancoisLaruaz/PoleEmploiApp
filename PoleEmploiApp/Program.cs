@@ -6,7 +6,13 @@ using PoleEmploiApp.Services.Interfaces;
 using PoleEmploiApp.Services.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+/*
+builder.WebHost.UseKestrel(options =>
+{
+    options.Limits.MaxConcurrentConnections = 100;
+    options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(60);
+});
+*/
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IJobOfferService, JobOfferService>();
@@ -15,9 +21,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 
 
 var settings = builder.Configuration.GetSection("ConnectionStrings").Get<ConnectionStrings>();
-
 var DefaultConnection = settings.DefaultConnection;
-
 builder.Services.AddDbContext<PoleEmploiContext>(options => options.UseSqlServer(DefaultConnection));
 
 var app = builder.Build();

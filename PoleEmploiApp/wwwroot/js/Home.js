@@ -26,9 +26,10 @@ function refreshJobOffers() {
             refreshJobOffersBtn.prop("disabled", false);
         },
         error: function (xhr, error) {
-            console.log(" : error" + error);
+    
+            console.log(" : error" + xhr.responseText);
             refreshJobOffersBtn.prop("disabled", false);
-            spanInfo.html('An error occured : '+error);
+            spanInfo.html('An error occured : ' + xhr.responseText);
         }
     });
   
