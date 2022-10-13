@@ -127,8 +127,8 @@ namespace PoleEmploiApp.Services
                 ExcelDownload.SetValue("Type de durée", Item.WorkTime);
                 ExcelDownload.SetValue("Url", Item.ApplicationUrl);
             }
-            
 
+            ExcelDownload.AutoFilter();
             ExcelDownload.AutoFitColumns();
             Result.FileName = string.Format("{0}_Jobs.xlsx", DateTime.UtcNow.ToString("yyyy-MM-dd"));
             Result.FileBytes = ExcelDownload.FileBytes;
