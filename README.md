@@ -18,7 +18,7 @@ L'application dispose d'un IHM avec une seule page. Cette page comporte :
 
 ## [Démo](https://francoislaruaz.azurewebsites.net/) en ligne
 Work in progress ...
-
+Juste un timeout provenant d'Azure pour le refresh des data.
 
 ## Accès Base de données
 
