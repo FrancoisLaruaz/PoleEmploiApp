@@ -100,6 +100,7 @@ namespace PoleEmploiApp.Services
         private PoleEmploiAPIJobOffersOutput GetPoleEmploiJobOffers(string CityCode,int rangeMin,int rangeMax)
         {
             List<string> scopes = new List<string>() { "api_offresdemploiv2", "o2dsoffre" };
+            // TODO: find a way to avoid having one token per request. A token can last several requests. Each token has an expiration date, we should use this information in the future.
             string accessToken = GenerateAccessToken(scopes);
             if (String.IsNullOrWhiteSpace(accessToken))
             {
