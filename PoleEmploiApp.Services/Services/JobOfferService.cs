@@ -8,7 +8,7 @@ namespace PoleEmploiApp.Services
     public class JobOfferService : IJobOfferService
     {
         private readonly IGenericRepository<JobOffer> _jobOfferRepo;
-        private IPoleEmploiAPIService _poleEmploiAPIService;
+        private readonly IPoleEmploiAPIService _poleEmploiAPIService;
 
         public JobOfferService(IPoleEmploiAPIService poleEmploiAPIService, IGenericRepository<JobOffer> jobOfferRepo)
         {
@@ -70,8 +70,11 @@ namespace PoleEmploiApp.Services
                     result.Error = result.Error + " | error for Id = " + jobOfferFromAPI.id + " : " + e.ToString();
                 }
             }
-            // we save at the end to avoid useless DB connections
-            result.Success = result.Success & _jobOfferRepo.Save();
+            if (currentTransactionsNumber > 0)
+            {
+                // we save at the end to avoid useless DB connections
+                result.Success = result.Success & _jobOfferRepo.Save();
+            }
             #endregion
             return result;
         }

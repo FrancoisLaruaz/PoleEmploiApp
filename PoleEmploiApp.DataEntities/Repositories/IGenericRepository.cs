@@ -47,7 +47,6 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             catch (Exception e)
             {
                 result = e.ToString();
-              //  Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, predicate.ToString());
             }
             return result;
         }
@@ -62,7 +61,6 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             }
             catch (Exception e)
             {
-               // Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, predicate.ToString());
             }
             return new List<T>();
         }
@@ -77,7 +75,6 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             catch (Exception e)
             {
                 result = false;
-           //     Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, entity.ToString());
             }
             return result;
         }
@@ -96,7 +93,6 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             catch (Exception e)
             {
                 result = false;
-            //    Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
             }
             return result;
         }
@@ -111,7 +107,6 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             catch (Exception e)
             {
                 result = false;
-              //  Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "id =" + id);
             }
             return result;
         }
@@ -124,7 +119,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             }
             catch (Exception e)
             {
-            //    Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "id = " + id);
+
             }
             return null;
         }
@@ -138,12 +133,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             }
             catch (Exception e)
             {
-                /*
-                if (entity != null)
-                    Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "State=" + entity.GetType());
-                else
-                    Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, "null object");
-                */
+
             }
             return null;
         }
@@ -160,7 +150,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             }
             catch (Exception e)
             {
-              //  Logger.Logger.GenerateError(e, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, null);
+          
             }
             return null;
         }

@@ -14,7 +14,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 
 
 // TODO => add connection string on appSettings.json file
-string sql = "Server=database-1.cx5qrvj1ajmz.ca-central-1.rds.amazonaws.com;Database=PoleEmploi;User Id=admin;password=HelloWork;Trusted_Connection=False;MultipleActiveResultSets=true;Connection Timeout=120;";
+string sql = "Server=database-1.cx5qrvj1ajmz.ca-central-1.rds.amazonaws.com;Database=PoleEmploi;User Id=admin;password=HelloWork;Trusted_Connection=False;MultipleActiveResultSets=true;Connection Timeout=500;";
 builder.Services.AddDbContext<PoleEmploiContext>(options => options.UseSqlServer(sql));
 
 var app = builder.Build();
