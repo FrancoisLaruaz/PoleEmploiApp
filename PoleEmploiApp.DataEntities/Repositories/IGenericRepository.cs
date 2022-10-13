@@ -59,7 +59,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
                 IEnumerable<T> query = _context.Set<T>().Where(predicate);
                 return query;
             }
-            catch (Exception e)
+            catch
             {
             }
             return new List<T>();
@@ -72,7 +72,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             {
                 _context.Set<T>().Add(entity);
             }
-            catch (Exception e)
+            catch 
             {
                 result = false;
             }
@@ -90,7 +90,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
                 }
 
             }
-            catch (Exception e)
+            catch 
             {
                 result = false;
             }
@@ -104,7 +104,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             {
                 _context.Set<T>().Remove(Get(id));
             }
-            catch (Exception e)
+            catch
             {
                 result = false;
             }
@@ -117,7 +117,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             {
                 // return _context.Set<T>().Remove(entity);
             }
-            catch (Exception e)
+            catch
             {
 
             }
@@ -131,7 +131,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
                 _context.Entry(entity).CurrentValues.SetValues(entity);
                 return entity;
             }
-            catch (Exception e)
+            catch 
             {
 
             }
@@ -148,7 +148,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
                 }
                 return entityList;
             }
-            catch (Exception e)
+            catch
             {
           
             }
@@ -181,7 +181,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
                     sb.AppendLine($"| Entity of type {eve.Entity.GetType().Name} in state {eve.State} could not be updated.");
                 }
             }
-            catch (Exception e)
+            catch 
             {
                 result = false;
             }
@@ -198,7 +198,7 @@ namespace PoleEmploiApp.DataEntities.Repositories.Interfaces
             {
                 m = _context.Set<T>().Find(id);
             }
-            catch (Exception e)
+            catch 
             {
                
             }

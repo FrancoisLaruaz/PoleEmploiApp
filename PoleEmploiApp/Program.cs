@@ -3,6 +3,7 @@ using PoleEmploiApp.DataEntities;
 using PoleEmploiApp.DataEntities.Repositories.Interfaces;
 using PoleEmploiApp.Services;
 using PoleEmploiApp.Services.Interfaces;
+using PoleEmploiApp.Services.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +14,11 @@ builder.Services.AddScoped<IPoleEmploiAPIService, PoleEmploiAPIService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 
-// TODO => add connection string on appSettings.json file
-string sql = "Server=database-1.cx5qrvj1ajmz.ca-central-1.rds.amazonaws.com;Database=PoleEmploi;User Id=admin;password=HelloWork;Trusted_Connection=False;MultipleActiveResultSets=true;Connection Timeout=500;";
-builder.Services.AddDbContext<PoleEmploiContext>(options => options.UseSqlServer(sql));
+var settings = builder.Configuration.GetSection("ConnectionStrings").Get<ConnectionStrings>();
+
+var DefaultConnection = settings.DefaultConnection;
+
+builder.Services.AddDbContext<PoleEmploiContext>(options => options.UseSqlServer(DefaultConnection));
 
 var app = builder.Build();
 
