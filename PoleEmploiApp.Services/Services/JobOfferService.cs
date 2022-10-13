@@ -33,7 +33,11 @@ namespace PoleEmploiApp.Services
             // We first get the list of the existing job offers to know which ones exist qnd which ones need to be created
             List<JobOffer> existingJobOffers = _jobOfferRepo.List().ToList();
 
-            foreach(var jobOfferFromAPI in jobOffersFromAPI)
+            // Number of requests to commit changes. We dotn want to commit too many requests at the end to avoid performance issues
+            int maxBulk = 500;
+            int currentTransactionsNumber = 0;
+            result.Success = true;
+            foreach (var jobOfferFromAPI in jobOffersFromAPI)
             {
                 try
                 {
@@ -41,15 +45,24 @@ namespace PoleEmploiApp.Services
                     JobOffer existingJobOffer = existingJobOffers.FirstOrDefault(s => s.PoleEmploiId == jobOfferFromAPI.id);
                     if (existingJobOffer==null)
                     {
+                        currentTransactionsNumber++;
                         result.RowsAddedNumber++;
                         _jobOfferRepo.Add(MapAPIResultatToJobOffer(jobOfferFromAPI));
                     }
                     else if(existingJobOffer.LastModificationDate< jobOfferFromAPI.dateActualisation)
                     {
+                        // If the job exists but has been modified since the last modification, we update the database
+                        currentTransactionsNumber++;
                         result.RowsUpdatedNumber++;
                         JobOffer jobOffer = MapAPIResultatToJobOffer(jobOfferFromAPI);
                         jobOffer.Id = existingJobOffer.Id;
                         _jobOfferRepo.Edit(jobOffer);
+                    }
+
+                    if(currentTransactionsNumber>= maxBulk)
+                    {
+                        result.Success = result.Success & _jobOfferRepo.Save();
+                        currentTransactionsNumber = 0;
                     }
                 }
                 catch(Exception e)
@@ -58,7 +71,7 @@ namespace PoleEmploiApp.Services
                 }
             }
             // we save at the end to avoid useless DB connections
-            result.Success= _jobOfferRepo.Save();
+            result.Success = result.Success & _jobOfferRepo.Save();
             #endregion
             return result;
         }
@@ -92,9 +105,6 @@ namespace PoleEmploiApp.Services
             // TODO : use the API instead of hardcoding the codes to have a cleaner code
             // We only check offers from Bordeaux, Paris and Rennes
             List<string> cityCodes = new List<string>() { "75101", "75102", "75103", "75104", "75105", "75106", "75107", "75108", "75109", "75110", "75111", "75112", "75113", "75114", "75115", "75116", "75117", "75118", "75119", "75120", "33063", "35238" };
-
-          //  cityCodes = new List<string>() { "75101" };
-
 
             List<Resultat> jobOffers = new List<Resultat>();
             int maxPagination = 150;
@@ -168,8 +178,7 @@ namespace PoleEmploiApp.Services
                 ExcelDownload.SetValue("Url", Item.ApplicationUrl);
             }
             
-            ExcelDownload.AutoFitColumns();
-            ExcelDownload.AutoFilter();
+
             ExcelDownload.AutoFitColumns();
             Result.FileName = string.Format("{0}_Jobs.xlsx", DateTime.UtcNow.ToString("yyyy-MM-dd"));
             Result.FileBytes = ExcelDownload.FileBytes;

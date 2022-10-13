@@ -12,7 +12,7 @@ builder.Services.AddScoped<IJobOfferService, JobOfferService>();
 builder.Services.AddScoped<IPoleEmploiAPIService, PoleEmploiAPIService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-// TODO => add connection string on condig file
+// TODO => add connection string on appSettings.json file
 string sql = "Server=database-1.cx5qrvj1ajmz.ca-central-1.rds.amazonaws.com;Database=PoleEmploi;User Id=admin;password=HelloWork;Trusted_Connection=False;MultipleActiveResultSets=true;Connection Timeout=120;";
 builder.Services.AddDbContext<PoleEmploiContext>(options => options.UseSqlServer(sql));
 
