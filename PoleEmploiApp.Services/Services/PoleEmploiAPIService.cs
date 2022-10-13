@@ -43,7 +43,7 @@ namespace PoleEmploiApp.Services
         }
 
 
-        public static TResult PostFormUrlEncoded<TResult>(string url, IEnumerable<KeyValuePair<string, string>> postData)
+        private static TResult PostFormUrlEncoded<TResult>(string url, IEnumerable<KeyValuePair<string, string>> postData)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace PoleEmploiApp.Services
         /// Get job offers from Pole-Emploi API
         /// </summary>
         /// <returns></returns>
-        public PoleEmploiAPIJobOffersOutput GetPoleEmploiJobOffers(string CityCode,int rangeMin,int rangeMax)
+        private PoleEmploiAPIJobOffersOutput GetPoleEmploiJobOffers(string CityCode,int rangeMin,int rangeMax)
         {
             List<string> scopes = new List<string>() { "api_offresdemploiv2", "o2dsoffre" };
             string accessToken = GenerateAccessToken(scopes);
@@ -128,6 +128,61 @@ namespace PoleEmploiApp.Services
                 string error = GetWebExceptionBody(e);
             }
             return null;
+        }
+
+        /// <summary>
+        ///  Get the data from the API
+        /// </summary>
+        /// <returns></returns>
+        public List<Resultat> GetJobOffersData()
+        {
+
+            // codes found via https://api.emploi-store.fr/partenaire/offresdemploi/v2/referentiel/communes API
+            // TODO : use the API instead of hardcoding the codes to have a cleaner code
+            // We only check offers from Bordeaux, Paris and Rennes
+            List<string> cityCodes = new List<string>() { "75101", "75102", "75103", "75104", "75105", "75106", "75107", "75108", "75109", "75110", "75111", "75112", "75113", "75114", "75115", "75116", "75117", "75118", "75119", "75120", "33063", "35238" };
+
+            List<Resultat> jobOffers = new List<Resultat>();
+            int maxPagination = 150;
+            int maxMinRangeIndex = 1000;
+            int rangeMin, rangeMax, lastRangeMin;
+
+            foreach (string cityCode in cityCodes)
+            {
+                bool moreOffersToProspect = true;
+                rangeMin = 0;
+                rangeMax = maxPagination - 1;
+                lastRangeMin = rangeMin;
+                while (moreOffersToProspect)
+                {
+                    PoleEmploiAPIJobOffersOutput poleEmploiAPIJobOffersOutput = GetPoleEmploiJobOffers(cityCode, rangeMin, rangeMax);
+                    if (poleEmploiAPIJobOffersOutput != null)
+                    {
+                        jobOffers.AddRange(poleEmploiAPIJobOffersOutput.resultats);
+                        if (poleEmploiAPIJobOffersOutput.resultats.Count < maxPagination)
+                        {
+                            moreOffersToProspect = false;
+                        }
+                        else
+                        {
+                            rangeMin = rangeMin + maxPagination;
+                            if (rangeMin > maxMinRangeIndex)
+                            {
+                                rangeMin = maxMinRangeIndex;
+                            }
+                            if (lastRangeMin == rangeMin)
+                            {
+                                // 1000 is the maximum for the min range. No need to continue
+                                moreOffersToProspect = false;
+                                break;
+                            }
+                            rangeMax = rangeMin + (maxPagination - 1);
+                            lastRangeMin = rangeMin;
+                        }
+                    }
+                }
+            }
+            return jobOffers;
         }
 
     }

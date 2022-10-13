@@ -4,6 +4,6 @@ namespace PoleEmploiApp.Services.Interfaces
 {
     public interface IPoleEmploiAPIService
     {
-        PoleEmploiAPIJobOffersOutput GetPoleEmploiJobOffers(string CityCode, int rangeMin, int rangeMax);
+        public List<Resultat> GetJobOffersData();
     }
 }
