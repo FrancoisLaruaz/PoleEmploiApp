@@ -97,10 +97,14 @@ namespace PoleEmploiApp.Services
         /// Get job offers from Pole-Emploi API
         /// </summary>
         /// <returns></returns>
-        private PoleEmploiAPIJobOffersOutput GetPoleEmploiJobOffers(string CityCode,int rangeMin,int rangeMax,string accessToken)
+        private PoleEmploiAPIJobOffersOutput GetPoleEmploiJobOffers(string CityCode,int rangeMin,int rangeMax)
         {
             List<string> scopes = new List<string>() { "api_offresdemploiv2", "o2dsoffre" };
-
+            string accessToken = GenerateAccessToken(scopes);
+            if (String.IsNullOrWhiteSpace(accessToken))
+            {
+                return null;
+            }
 
             string url = BaseAPIUrl + "/partenaire/offresdemploi/v2/offres/search?sort=1&commune=" + CityCode+"&range="+ rangeMin+"-"+rangeMax;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -137,11 +141,7 @@ namespace PoleEmploiApp.Services
             // TODO : use the API instead of hardcoding the codes to have a cleaner code
             // We only check offers from Bordeaux, Paris and Rennes
             List<string> cityCodes = new List<string>() { "75101", "75102", "75103", "75104", "75105", "75106", "75107", "75108", "75109", "75110", "75111", "75112", "75113", "75114", "75115", "75116", "75117", "75118", "75119", "75120", "33063", "35238" };
-            string accessToken = GenerateAccessToken(cityCodes);
-            if (String.IsNullOrWhiteSpace(accessToken))
-            {
-                return null;
-            }
+
             List<Resultat> jobOffers = new List<Resultat>();
             int maxPagination = 150;
             int maxMinRangeIndex = 1000;
@@ -155,7 +155,7 @@ namespace PoleEmploiApp.Services
                 lastRangeMin = rangeMin;
                 while (moreOffersToProspect)
                 {
-                    PoleEmploiAPIJobOffersOutput poleEmploiAPIJobOffersOutput = GetPoleEmploiJobOffers(cityCode, rangeMin, rangeMax, accessToken);
+                    PoleEmploiAPIJobOffersOutput poleEmploiAPIJobOffersOutput = GetPoleEmploiJobOffers(cityCode, rangeMin, rangeMax);
                     if (poleEmploiAPIJobOffersOutput != null)
                     {
                         jobOffers.AddRange(poleEmploiAPIJobOffersOutput.resultats);
