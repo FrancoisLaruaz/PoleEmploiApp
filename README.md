@@ -17,8 +17,8 @@ L'application dispose d'un IHM avec une seule page. Cette page comporte :
  
 
 ## [Démo](https://francoislaruaz.azurewebsites.net/) en ligne
+Work in progress ...
 
-Une version du site a été dépployé sur Azure afin de faciliter la visualisation de l'application : https://francoislaruaz.azurewebsites.net/
 
 ## Accès Base de données
 
