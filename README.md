@@ -2,7 +2,7 @@
 Application collecting job offers and exporting data via an Excel file.
 
 L'application dispose d'un IHM avec une seule page. Cette page comporte :
-- Un bouton pour rafraichir les données (offres d'emploi sur Paris, Rennes et Bordeaux)
+- Un bouton pour rafraichir les données (offres d'emploi sur Paris, Rennes et Bordeaux).
 - Un lien permettant de télécharger un fichier Excel avec les données enregistrées en base de données. Ce fichier Excel permettra à l'utilisateur de manipuler les données et trouver les statistiques dont il a besoin.
 
 ## Pré-requis
@@ -33,7 +33,7 @@ Une base de données SQL Server est utilisée pour sauvegarder les informations.
 ## Fabriqué avec
 
 * .NET Core 6.0 (MVC)
-* SQL Server Express 20199 + EF 6 
+* SQL Server Express 2019 + EF 6 
 * Razor + jQuery pour le front
 
 ## Améliorations possibles
