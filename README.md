@@ -17,8 +17,9 @@ L'application dispose d'un IHM avec une seule page. Cette page comporte :
  
 
 ## [Démo](https://francoislaruaz.azurewebsites.net/) en ligne
-Work in progress ...
-Juste un timeout provenant d'Azure pour le refresh des data.
+https://francoislaruaz.azurewebsites.net/
+Site hébergé sur Azure.
+Pour cette demo, seules les offres de Paris, Bordeaux et Paris (75101) sont récupérés.
 
 ## Accès Base de données
 
@@ -34,6 +35,12 @@ Une base de données SQL Server est utilisée pour sauvegarder les informations.
 * .NET Core 6.0 (MVC)
 * SQL Server Express 20199 + EF 6 
 * Razor + jQuery pour le front
+
+## Améliorations possibles
+
+* Gestion des erreurs
+* Utilisation de l'API de rccuperation des codes de ville au lieu d'avoir les codes en dur
+* Meilleure utilisation du token d'authentification : Nous n'avons pas besoin d'un token pour chaque requête. Celui-ci doit etre réutilisé tant qu'il est valide (L'expiration du token est fournie lors de sa récupération). 
 
 ## Auteur
 
