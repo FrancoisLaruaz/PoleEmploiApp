@@ -22,7 +22,8 @@ namespace PoleEmploiApp.Services
 
             #region 1) We get the data from the API
 
-           List<Resultat> jobOffersFromAPI = poleEmploiAPIService.GetJobOffersData();
+           List<Resultat> jobOffersFromAPI = poleEmploiAPIService.GetJobOffersData().GroupBy(p => p.id).Select(g => g.First()).ToList(); 
+      
 
             #endregion
 
@@ -32,7 +33,7 @@ namespace PoleEmploiApp.Services
 
             // We first get the list of the existing job offers to know which ones exist qnd which ones need to be created
             List<JobOffer> existingJobOffers = jobOfferRepo.List().ToList();
-
+        
             // Number of requests to commit changes. We dotn want to commit too many requests at the end to avoid performance issues
             int maxBulk = 500;
             int currentTransactionsNumber = 0;
