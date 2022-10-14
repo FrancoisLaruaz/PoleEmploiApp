@@ -8,13 +8,12 @@ namespace PoleEmploiApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IJobOfferService _jobOfferService;
-        private readonly ILogger<HomeController> _logger;
+        private IJobOfferService jobOfferService;
 
-        public HomeController(ILogger<HomeController> logger, IJobOfferService jobOfferService)
+
+        public HomeController(IJobOfferService _jobOfferService)
         {
-            _logger = logger;
-            _jobOfferService = jobOfferService;
+            jobOfferService = _jobOfferService;
         }
 
         public IActionResult Index()
@@ -26,14 +25,14 @@ namespace PoleEmploiApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult RefreshJobOffers()
         {
-            return Json(_jobOfferService.RefreshJobOffers());
+            return Json(jobOfferService.RefreshJobOffers());
         }
 
 
         public IActionResult DowloadExcelReport()
         {
 
-            FileProcessResult result = _jobOfferService.GetExcelReportData();
+            FileProcessResult result = jobOfferService.GetExcelReportData();
             if (result.FileBytes != null)
             {
                 return File(result.FileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, result.FileName);

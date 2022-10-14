@@ -7,13 +7,13 @@ namespace PoleEmploiApp.Services
 {
     public class JobOfferService : IJobOfferService
     {
-        private readonly IGenericRepository<JobOffer> _jobOfferRepo;
-        private readonly IPoleEmploiAPIService _poleEmploiAPIService;
+        private readonly IGenericRepository<JobOffer> jobOfferRepo;
+        private readonly IPoleEmploiAPIService poleEmploiAPIService;
 
-        public JobOfferService(IPoleEmploiAPIService poleEmploiAPIService, IGenericRepository<JobOffer> jobOfferRepo)
+        public JobOfferService(IPoleEmploiAPIService _poleEmploiAPIService, IGenericRepository<JobOffer> _jobOfferRepo)
         {
-            _poleEmploiAPIService = poleEmploiAPIService;
-            _jobOfferRepo = jobOfferRepo;
+            poleEmploiAPIService = _poleEmploiAPIService;
+            jobOfferRepo = _jobOfferRepo;
         }
 
         public JobOfferRefreshResult RefreshJobOffers()
@@ -22,7 +22,7 @@ namespace PoleEmploiApp.Services
 
             #region 1) We get the data from the API
 
-           List<Resultat> jobOffersFromAPI = _poleEmploiAPIService.GetJobOffersData();
+           List<Resultat> jobOffersFromAPI = poleEmploiAPIService.GetJobOffersData();
 
             #endregion
 
@@ -31,7 +31,7 @@ namespace PoleEmploiApp.Services
 
 
             // We first get the list of the existing job offers to know which ones exist qnd which ones need to be created
-            List<JobOffer> existingJobOffers = _jobOfferRepo.List().ToList();
+            List<JobOffer> existingJobOffers = jobOfferRepo.List().ToList();
 
             // Number of requests to commit changes. We dotn want to commit too many requests at the end to avoid performance issues
             int maxBulk = 500;
@@ -47,7 +47,7 @@ namespace PoleEmploiApp.Services
                     {
                         currentTransactionsNumber++;
                         result.RowsAddedNumber++;
-                        _jobOfferRepo.Add(MapAPIResultatToJobOffer(jobOfferFromAPI));
+                        jobOfferRepo.Add(MapAPIResultatToJobOffer(jobOfferFromAPI));
                     }
                     else if(existingJobOffer.LastModificationDate< jobOfferFromAPI.dateActualisation)
                     {
@@ -56,12 +56,12 @@ namespace PoleEmploiApp.Services
                         result.RowsUpdatedNumber++;
                         JobOffer jobOffer = MapAPIResultatToJobOffer(jobOfferFromAPI);
                         jobOffer.Id = existingJobOffer.Id;
-                        _jobOfferRepo.Edit(jobOffer);
+                        jobOfferRepo.Edit(jobOffer);
                     }
 
                     if(currentTransactionsNumber>= maxBulk)
                     {
-                        result.Success = result.Success & _jobOfferRepo.Save();
+                        result.Success = result.Success & jobOfferRepo.Save();
                         currentTransactionsNumber = 0;
                     }
                 }
@@ -74,7 +74,7 @@ namespace PoleEmploiApp.Services
             if (currentTransactionsNumber > 0)
             {
                 // we save at the end to avoid useless DB connections
-                result.Success = result.Success & _jobOfferRepo.Save();
+                result.Success = result.Success & jobOfferRepo.Save();
             }
             #endregion
             return result;
@@ -111,7 +111,7 @@ namespace PoleEmploiApp.Services
         {
             FileProcessResult Result = new FileProcessResult();
 
-            IEnumerable<JobOffer> jobData = _jobOfferRepo.List();
+            IEnumerable<JobOffer> jobData = jobOfferRepo.List();
 
             var ExcelDownload = new ExcelDownload();
             ExcelDownload.AddWorksheet("Data");
